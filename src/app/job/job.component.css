@@ -1,0 +1,29 @@
+.job{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.job-infos {
+    flex-grow: 2;
+    text-align: left;
+    margin: 0.5em 1.5em;
+}
+
+.job-infos-title {
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: bolder;
+}
+
+.job-infos-details { 
+    display: flex;
+    flex-direction: row;
+}
+
+.job-infos-details-company-name, .job-infos-details-ref {
+    font-size: 0.8em;
+    margin-right: 1em;
+}
+
