@@ -1,9 +1,8 @@
-@if(jobs$ | async ; as jobs) {
-    @for(job of jobs; track job.id){
-        <njs-job [job]="job" />
-    }
-
+@if(favorites.length !== 0 || (path$ | async) === 'jobs') {
+    @for(job of jobs$|async; track job.id){
+    <njs-job [job]="job" />
+}
 }
 @else {
-<div>No jobs to display</div>
+    <div class="no-favorites">No favorite selected</div>
 }
