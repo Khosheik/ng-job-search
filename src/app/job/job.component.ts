@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Job } from '../models';
+import { JobsService } from '../jobs.service';
 
 @Component({
   selector: 'njs-job',
@@ -10,4 +11,19 @@ import { Job } from '../models';
 })
 export class JobComponent {
  @Input() job!: Job; 
+ 
+ isFavorite = false;
+
+  constructor(private jobsService: JobsService){}
+
+  //favor or unfavor job
+  clickOnStar(job: Job){
+    this.isFavorite = !this.isFavorite;
+
+    if(this.isFavorite){
+      this.jobsService.addToFavorite(job)
+    } else {
+      console.log('unfavored')
+    }
+  }
 }

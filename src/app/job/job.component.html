@@ -7,5 +7,5 @@
             <div class="job-infos-details-ref">{{job.reference}}</div>
         </div>
     </div>
-    <span class="icon-star" [id]="'star' + job.id"></span>
+    <span class="icon-star" [id]="'star' + job.id" [class.star-active]="isFavorite" (click)="clickOnStar(job)"></span>
     </div>

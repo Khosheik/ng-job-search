@@ -1,6 +1,6 @@
 .menu {
     display: flex;
-   
+    margin: 1em 0;
 }
 
 .menu-button {
