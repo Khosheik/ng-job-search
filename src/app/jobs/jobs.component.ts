@@ -12,8 +12,7 @@ import { JobComponent } from '../job/job.component';
   styleUrl: './jobs.component.css'
 })
 export class JobsComponent {
-
-  jobs$ = this.jobsService.getJobs()
+  jobs$ = this.jobsService.getJobsWithFavoriteField()
 
   constructor(private jobsService: JobsService){}
 
