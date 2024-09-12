@@ -16,13 +16,15 @@ export class JobsService {
     storedFavoriteJobs ? this.favoriteJobs = JSON.parse(storedFavoriteJobs) : this.favoriteJobs = [];
   }
 
-  getJobs(): Observable<Array<Job>> {
+  getJobsFromApi(): Observable<Array<Job>> {
     return this.http.get<Array<Job>>('/jobs')
   }
 
-  getJobsWithFavoriteField(){
-    const jobs = this.getJobs();
+  getJobs(){
+    const jobs = this.getJobsFromApi();
+
     const jobsWithFavoriteField = this.addFavoriteField(jobs)
+
     return jobsWithFavoriteField;
   }
 
@@ -32,14 +34,12 @@ export class JobsService {
     if (!alreadyFavored) {
       this.favoriteJobs.push(job);
       window.localStorage.setItem('FavoriteJobs', JSON.stringify(this.favoriteJobs));
-      console.log('add')
     }
   }
 
   removeFromFavorite(job: Job) {
     this.favoriteJobs = this.favoriteJobs.filter((jobInFavorites) => jobInFavorites.id !== job.id);
     window.localStorage.setItem('FavoriteJobs', JSON.stringify(this.favoriteJobs));
-    console.log('remove')
   }
 
   addFavoriteField(jobs: Observable<Array<Job>>): Observable<Array<Job>> {

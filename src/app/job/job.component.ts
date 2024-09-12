@@ -12,7 +12,6 @@ import { NgIf } from '@angular/common';
 })
 export class JobComponent {
   @Input() job!: Job;
-  @Input() jobPage: Boolean = true;
 
   constructor(private jobsService: JobsService) {}
 
