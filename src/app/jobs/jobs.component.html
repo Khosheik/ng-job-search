@@ -1,5 +1,9 @@
-<div *ngFor="let job of jobs$ | async; trackBy: trackByFn">
-    <ng-container *ngIf="((path$ | async) === 'jobs') || job.isFavorite">
+@if(jobs$ | async ; as jobs) {
+    @for(job of jobs; track job.id){
         <njs-job [job]="job" />
-    </ng-container>
-</div>
+    }
+
+}
+@else {
+<div>No jobs to display</div>
+}

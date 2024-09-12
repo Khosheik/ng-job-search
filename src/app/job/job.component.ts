@@ -1,12 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { Job } from '../models';
 import { JobsService } from '../jobs.service';
-import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'njs-job',
   standalone: true,
-  imports: [NgIf],
+  imports: [],
   templateUrl: './job.component.html',
   styleUrl: './job.component.css'
 })

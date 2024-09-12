@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Job } from './models';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs';
 
 @Injectable({
@@ -10,22 +10,30 @@ import { map } from 'rxjs';
 export class JobsService {
 
   favoriteJobs: Job[];
+  jobs$: Observable<Array<Job>> = of([]);
 
   constructor(private http: HttpClient) {
     const storedFavoriteJobs = window.localStorage.getItem('FavoriteJobs')
     storedFavoriteJobs ? this.favoriteJobs = JSON.parse(storedFavoriteJobs) : this.favoriteJobs = [];
+
   }
 
-  getJobsFromApi(): Observable<Array<Job>> {
-    return this.http.get<Array<Job>>('/jobs')
-  }
+  getJobs(path: Observable<string>){
+    let currentPath: string = ''; 
+    let jobs: Observable<Array<Job>> = this.addFavoriteField(this.http.get<Array<Job>>('/jobs'))   
 
-  getJobs(){
-    const jobs = this.getJobsFromApi();
+    path.pipe().subscribe(
+      result => currentPath = result
+    )
+
+    if(currentPath === 'favorites') {
+      jobs = this.jobsFilteredByFavorite(jobs);  
+    } 
 
     const jobsWithFavoriteField = this.addFavoriteField(jobs)
 
-    return jobsWithFavoriteField;
+    this.jobs$ = jobsWithFavoriteField;
+    return this.jobs$;
   }
 
   addToFavorite(job: Job) {
@@ -59,6 +67,16 @@ export class JobsService {
   isInFavorites(job: Job) {
     const isFavorite = this.favoriteJobs.find((jobInFavorites) => jobInFavorites.id === job.id);
     return isFavorite ? true : false;
+  }
+
+  jobsFilteredByFavorite(jobs: Observable<Array<Job>>){
+    return jobs.pipe(
+      map((jobs) => {
+        const filteredJobs = jobs.filter(job => job.isFavorite === true)
+        console.log(filteredJobs)
+        return filteredJobs
+      })
+    )
   }
 
 }
