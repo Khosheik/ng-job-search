@@ -10,20 +10,17 @@ import { JobsService } from '../jobs.service';
   styleUrl: './job.component.css'
 })
 export class JobComponent {
- @Input() job!: Job; 
- 
- isFavorite = false;
+  @Input() job!: Job;
 
-  constructor(private jobsService: JobsService){}
+  isFavorite = false;
+
+  constructor(private jobsService: JobsService) { }
 
   //favor or unfavor job
-  clickOnStar(job: Job){
+  clickOnStar(job: Job) {
     this.isFavorite = !this.isFavorite;
 
-    if(this.isFavorite){
-      this.jobsService.addToFavorite(job)
-    } else {
-      console.log('unfavored')
-    }
+    this.isFavorite ? this.jobsService.addToFavorite(job) : this.jobsService.removeFromFavorite(job)
+
   }
 }

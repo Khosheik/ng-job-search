@@ -20,7 +20,7 @@ export class JobsService {
   }
 
   addToFavorite(job: Job) {
-    const alreadyFavored = this.favoriteJobs.find((jobToPush) => jobToPush.id === job.id); 
+    const alreadyFavored = this.favoriteJobs.find((jobInFavorites) => jobInFavorites.id === job.id); 
 
     if(!alreadyFavored){
       this.favoriteJobs.push(job);
@@ -29,7 +29,8 @@ export class JobsService {
   }
 
   removeFromFavorite(job: Job) {
-
+    this.favoriteJobs = this.favoriteJobs.filter((jobInFavorites) => jobInFavorites.id !== job.id); 
+    window.localStorage.setItem('FavoriteJobs', JSON.stringify(this.favoriteJobs));
   }
 
 
