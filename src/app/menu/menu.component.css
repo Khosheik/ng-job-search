@@ -1,0 +1,25 @@
+.menu {
+    display: flex;
+   
+}
+
+.menu-button {
+    margin: auto;
+    flex: auto;
+    text-transform: uppercase;
+    background-color: #EBEFF5;
+    color: #3A4252; 
+    text-align: center;
+    text-decoration: none;
+}
+
+.active {
+    background-color: #3A4252; 
+    color: #EBEFF5; 
+    font-weight: bolder;
+}
+
+.menu-button:hover {
+    font-weight: bolder;
+}
+
