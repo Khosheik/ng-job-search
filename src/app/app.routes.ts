@@ -12,4 +12,5 @@ export const routes: Routes = [
     },
     { path: 'favorites', component: JobsComponent },
     { path: '', redirectTo: 'jobs', pathMatch: 'full' },
+    { path: '**', redirectTo: 'jobs', pathMatch: 'full' },
 ];
