@@ -1,5 +1,5 @@
 @if(favorites.length !== 0 || page === 'jobs') {
-    @for(job of jobs$|async; track job.id){
+    @for(job of jobs$ | async; track job.id){
     <njs-job [job]="job" />
 }
 }
