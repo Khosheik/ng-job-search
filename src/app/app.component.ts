@@ -11,5 +11,5 @@ import { JobsComponent } from './jobs/jobs.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'ng-job-search';
+  title = 'Find your job';
 }
