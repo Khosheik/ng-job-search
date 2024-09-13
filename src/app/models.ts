@@ -9,5 +9,5 @@ export interface Job {
     types?: string[], 
     description?: string, 
     publishDate?: Date,
-    isFavorite?: Boolean,
+    isFavorite?: boolean,
 }

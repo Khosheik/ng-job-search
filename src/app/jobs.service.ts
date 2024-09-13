@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Job } from './models';
-import { Observable, of, map, filter } from 'rxjs';
+import { Observable, of, map } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 
@@ -24,12 +24,11 @@ export class JobsService {
   }
 
   getDetailedJobFromApi(jobId: number){
-    let job = this.http.get<Job>(`/jobs/${jobId}`)
-    return this.http.get<Job>(`/jobs/${jobId}`);
+    return this.http.get<Job>(`/jobs/${jobId}`)
   }
 
   getJobs(page: string){
-    let jobs: Observable<Array<Job>> = this.getJobsFromApi()
+    const jobs: Observable<Array<Job>> = this.getJobsFromApi()
     let jobsWithFavoriteField: Observable<Array<Job>> = this.addFavoriteField(jobs)   
 
     if(page === 'favorites') {
@@ -57,7 +56,7 @@ export class JobsService {
   addFavoriteField(jobs: Observable<Array<Job>>): Observable<Array<Job>> {
     return jobs.pipe(
       map((jobs) => {
-        for (let job of jobs) {
+        for (const job of jobs) {
           const isInFavorite = this.isInFavorites(job)
           const jobIndex = jobs.findIndex(jobInJobs => jobInJobs.id === job.id)
           jobs[jobIndex] = { ...job, isFavorite: isInFavorite };
