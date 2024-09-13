@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Job } from './models';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs';
+import { Observable, of, map } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -18,15 +19,11 @@ export class JobsService {
 
   }
 
-  getJobs(path: Observable<string>){
-    let currentPath: string = ''; 
+  getJobs(page: string){
     let jobs: Observable<Array<Job>> = this.addFavoriteField(this.http.get<Array<Job>>('/jobs'))   
 
-    path.pipe().subscribe(
-      result => currentPath = result
-    )
-
-    if(currentPath === 'favorites') {
+    if(page === 'favorites') {
+      console.log('fav')
       jobs = this.jobsFilteredByFavorite(jobs);  
     } 
 
@@ -77,6 +74,13 @@ export class JobsService {
         return filteredJobs
       })
     )
+  }
+
+  isJobsOrFavoritesPage(route: ActivatedRoute){
+    let parentPath;
+    route.parent!.url.pipe(takeUntilDestroyed()).subscribe(result => parentPath = result[0].path);
+
+    return parentPath ? 'jobs' : 'favorites'; 
   }
 
 }

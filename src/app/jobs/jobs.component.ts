@@ -4,6 +4,7 @@ import { AsyncPipe } from '@angular/common';
 import { JobComponent } from '../job/job.component';
 import { ActivatedRoute } from '@angular/router';
 import { map, of } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'njs-jobs',
@@ -13,10 +14,10 @@ import { map, of } from 'rxjs';
   styleUrl: './jobs.component.css'
 })
 export class JobsComponent {
-  path$ = this.route.url.pipe(map(result => result[0].path));
-  jobs$ = this.jobsService.getJobs(this.path$);
+  page = this.jobsService.isJobsOrFavoritesPage(this.route)
+  jobs$ = this.jobsService.getJobs(this.page);
   favorites = this.jobsService.favoriteJobs;
 
-  constructor(private jobsService: JobsService, private route: ActivatedRoute){
-  }
+  constructor(private jobsService: JobsService, private route: ActivatedRoute){}
+
 }

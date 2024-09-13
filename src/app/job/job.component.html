@@ -1,13 +1,13 @@
 <div class="job">
     <img [src]="job.companyLogo" [alt]=" job.companyName + 'logo'" width="50em">
     <div class="job-infos">
-        <h2 class="job-infos-title">{{job.title}}</h2>
+        <h2 class="job-infos-title"><a [routerLink]="['/jobs', job.id]">{{job.title}}</a></h2>
         <div class="job-infos-details">
             <div class="job-infos-details-company-name">Company: {{job.companyName}}</div>
             <div class="job-infos-details-ref">{{job.reference}}</div>
         </div>
     </div>
-    <span class="icon-star" [id]="'star' + job.id" [class.star-active]="job.isFavorite"
+    <span class="icon-star" [id]="'star-' + job.id" [class.star-active]="job.isFavorite"
         (click)="clickOnStar(job)"></span>
 
 </div>

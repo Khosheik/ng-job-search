@@ -1,11 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { Job } from '../models';
 import { JobsService } from '../jobs.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'njs-job',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './job.component.html',
   styleUrl: './job.component.css'
 })

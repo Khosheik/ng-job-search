@@ -15,6 +15,10 @@
     margin: 0;
     font-size: 1.2em;
     font-weight: bolder;
+    
+    a {
+        color: #3A4252
+    };
 }
 
 .job-infos-details { 
