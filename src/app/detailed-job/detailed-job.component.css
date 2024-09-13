@@ -1,3 +1,14 @@
+.link-button{
+    background-color: #E5E9F0;
+    color: #3B4252;
+}
+
+.link-button:hover{
+    background-color: #3B4252;
+    color:#E5E9F0;
+    text-decoration: none;
+}
+
 .job-head {
     display: flex;
     flex-direction:row;

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { JobsService } from '../jobs.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Job } from '../models';
 import { AsyncPipe, DatePipe } from '@angular/common';
@@ -9,7 +9,7 @@ import { AsyncPipe, DatePipe } from '@angular/common';
 @Component({
   selector: 'njs-detailed-job',
   standalone: true,
-  imports: [AsyncPipe, DatePipe],
+  imports: [AsyncPipe, DatePipe, RouterLink],
   templateUrl: './detailed-job.component.html',
   styleUrl: './detailed-job.component.css'
 })

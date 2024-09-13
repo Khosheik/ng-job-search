@@ -88,16 +88,4 @@ export class JobsService {
 
     return parentPath ? 'jobs' : 'favorites'; 
   }
-
-  // getDetailedJob(jobId: number): Observable<Job | undefined>{
-  //   const jobs = this.getJobsFromApi();
-  //   return jobs.pipe(
-  //     map(jobs => {
-  //       console.log(jobs.find((job) => job.id === jobId))
-  //       return jobs.find((job) => job.id === jobId)
-  //     } 
-  //     ))
-
-  // }
-
 }
