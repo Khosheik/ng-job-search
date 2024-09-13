@@ -1,1 +1,29 @@
-<p>detailed-job works!</p>
+@if(job$ | async; as job){
+
+<div class="job-head">
+    <img [src]="job.companyLogo" [alt]=" job.companyName + 'logo'">
+    <div class="job-head-text">
+        <h1>{{job.companyName}} - {{job.title}}</h1>
+        <div class="tags">
+            @for(type of job.types; track type){
+            <div class="tag">{{type}}</div>
+            }
+            @for(industry of job.industries; track industry){
+            <div class="tag" [innerHTML]="industry"></div>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="job-info">
+    <div><span class="info-title">Publish date:</span> {{job.publishDate | date}}</div>
+    <div><span class="info-title">Location:</span> {{job.location}}</div>
+    <div><span class="info-title">Reference:</span> {{job.reference}}</div>
+</div>
+
+<div class="job-description">
+    <div class="info-title">Description:</div>
+    <div [innerHTML]="job.description"></div>
+</div>
+
+}

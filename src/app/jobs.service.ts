@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Job } from './models';
-import { Observable, of, map } from 'rxjs';
+import { Observable, of, map, filter } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 
@@ -19,15 +19,22 @@ export class JobsService {
 
   }
 
+  getJobsFromApi(){
+    return this.http.get<Array<Job>>('/jobs');
+  }
+
+  getDetailedJobFromApi(jobId: number){
+    let job = this.http.get<Job>(`/jobs/${jobId}`)
+    return this.http.get<Job>(`/jobs/${jobId}`);
+  }
+
   getJobs(page: string){
-    let jobs: Observable<Array<Job>> = this.addFavoriteField(this.http.get<Array<Job>>('/jobs'))   
+    let jobs: Observable<Array<Job>> = this.getJobsFromApi()
+    let jobsWithFavoriteField: Observable<Array<Job>> = this.addFavoriteField(jobs)   
 
     if(page === 'favorites') {
-      console.log('fav')
-      jobs = this.jobsFilteredByFavorite(jobs);  
+      jobsWithFavoriteField = this.jobsFilteredByFavorite(jobsWithFavoriteField);  
     } 
-
-    const jobsWithFavoriteField = this.addFavoriteField(jobs)
 
     this.jobs$ = jobsWithFavoriteField;
     return this.jobs$;
@@ -70,7 +77,6 @@ export class JobsService {
     return jobs.pipe(
       map((jobs) => {
         const filteredJobs = jobs.filter(job => job.isFavorite === true)
-        console.log(filteredJobs)
         return filteredJobs
       })
     )
@@ -82,5 +88,16 @@ export class JobsService {
 
     return parentPath ? 'jobs' : 'favorites'; 
   }
+
+  // getDetailedJob(jobId: number): Observable<Job | undefined>{
+  //   const jobs = this.getJobsFromApi();
+  //   return jobs.pipe(
+  //     map(jobs => {
+  //       console.log(jobs.find((job) => job.id === jobId))
+  //       return jobs.find((job) => job.id === jobId)
+  //     } 
+  //     ))
+
+  // }
 
 }

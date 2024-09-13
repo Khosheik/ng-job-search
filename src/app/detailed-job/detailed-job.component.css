@@ -1,0 +1,35 @@
+.job-head {
+    display: flex;
+    flex-direction:row;
+    margin: 1em 0;
+    align-items: flex-start;
+
+    img {
+        max-width: 80px;
+        max-height: 80px;
+    }
+}
+
+.job-head-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.tags { 
+    display: flex;
+    flex-direction: row;
+    margin-left: 0.5em;
+}
+
+.tag {
+    background-color: #587BA4;
+    border-radius: 25px;
+    padding: 5px 10px;
+    margin: 0.3em;
+    color: white;
+    font-size: small;
+}
+
+.info-title {
+    font-weight: bold;
+}

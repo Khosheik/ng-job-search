@@ -6,7 +6,7 @@ export interface Job {
     title: string,
     location?: string,
     industries?: string[], 
-    type?: string[], 
+    types?: string[], 
     description?: string, 
     publishDate?: Date,
     isFavorite?: Boolean,
